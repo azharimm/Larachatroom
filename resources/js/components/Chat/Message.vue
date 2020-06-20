@@ -1,10 +1,16 @@
 <template>
-	<div class="chat__message chat__message-own">
-		<strong class="chat__message-user">Azhari</strong>
-		<span class="chat__message-timestamp">12345678</span>
-		<p class="chat__message-body">Message.</p>
+	<div class="chat__message" :class="{'chat__message-own': message.selfOwned}">
+		<strong class="chat__message-user">{{ message.user.name }}</strong>
+		<span class="chat__message-timestamp">{{message.created_at}}</span>
+		<p class="chat__message-body">{{ message.body}}</p>
 	</div>
 </template>
+
+<script>
+export default {
+	props: ['message']
+}
+</script>
 
 <style lang="scss">
 	.chat {
