@@ -7,11 +7,13 @@
 				cols="30"
 				rows="4"
 				class="chat__form-input"
+				v-model="body"
+				@keydown="handleMessageInput"
 				>
 			</textarea>
 			<span
 				class="chat__form-helptext">
-				Hit Return to send or CTRL + Return for a new line
+				Hit Return to send or Shift + Return for a new line
 			</span>
 		</form>
 	</div>
@@ -19,7 +21,22 @@
 
 <script>
 export default {
-
+	data() {
+		return {
+			body: null
+		}
+	},
+	methods: {
+		handleMessageInput(e) {
+			if(e.keyCode === 13 && !e.shiftKey) {
+				e.preventDefault();
+				this.send()
+			}
+		},
+		send() {
+			console.log(this.body)
+		}
+	}
 }
 </script>
 
