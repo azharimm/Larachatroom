@@ -3,6 +3,7 @@
 namespace App\Models\Chat;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Message extends Model
 {
@@ -17,6 +18,6 @@ class Message extends Model
 
     public function user()
     {
-    	return $this->belongsTo(App\Models\User::class);
+    	return $this->belongsTo(User::class);
     }
 }
