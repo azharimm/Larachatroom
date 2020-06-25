@@ -1,5 +1,5 @@
 <template>
-	<div class="chat__messages">
+	<div class="chat__messages" ref="messages">
 		<chat-message
 			v-for="(message, index) in messages"
 			:key="message.id"
@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import Bus from '../../bus'
+
 export default {
 	data() {
 		return {
@@ -19,6 +21,15 @@ export default {
 		axios.get('/chat/messages').then(response => {
 			this.messages = response.data;
 		});
+
+		//listen bus
+		Bus.$on('message.added', (message) => {
+			this.messages.unshift(message);
+
+			if(message.selfOwned) {
+				this.$refs.messages.scrollTop = 0;
+			}
+		})
 	}
 }
 </script>
