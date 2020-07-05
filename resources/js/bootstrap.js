@@ -39,3 +39,5 @@ window.Echo = new Echo({
     cluster: 'ap1',
     encrypted: true
 });
+
+require('./echo')
