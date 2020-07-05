@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Chat\Message;
 use App\Http\Requests\Chat\StoreMessageRequest;
+use App\Events\Chat\MessageCreated;
 
 class ChatMessageController extends Controller
 {
@@ -21,6 +22,8 @@ class ChatMessageController extends Controller
     	$message = $request->user()->messages()->create([
     		'body' => $request->body
     	]);
+
+        broadcast(new MessageCreated($message))->toOthers();
 
     	return response()->json($message, 200);
     }
