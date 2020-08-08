@@ -12,5 +12,4 @@ Echo.join('chat')
 	})
 	.listen('Chat.MessageCreated', (e) => {
 		Bus.$emit('messages.added', e.message)
-		console.log(e)
 	})
